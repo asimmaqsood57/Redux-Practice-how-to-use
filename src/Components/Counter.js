@@ -7,7 +7,10 @@ import { counterActions } from "../Store/Index";
 import { useSelector, useDispatch } from "react-redux";
 const Counter = () => {
   const counter = useSelector((state) => state.counter);
-  const toggleCounter = useSelector((state) => state.showCounter);
+
+  const toggleCounter = useSelector((state) => state.counter.showCounter);
+
+  const auth = useSelector((state) => state.auth.isAuthenticated);
 
   const dispatch = useDispatch();
 
@@ -27,8 +30,12 @@ const Counter = () => {
 
   return (
     <main className={classes.counter}>
-      <h1>Redux Counter</h1>
-      {toggleCounter ? <div className={classes.value}>{counter}</div> : ""}
+      <h1>Redux Counter {auth.toString()} </h1>
+      {toggleCounter ? (
+        <div className={classes.value}>{counter.counter}</div>
+      ) : (
+        ""
+      )}
       <button onClick={toggleCounterHandler}>Toggle Counter</button>
       <div>
         <button onClick={incrementHandler}>Increment</button>
